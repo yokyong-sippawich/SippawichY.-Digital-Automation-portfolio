@@ -1,29 +1,34 @@
 # Weekly Summary – Scan Files Update (Power Automate Flow)
 
-This flow generates a weekly email summarizing scanned files for preventive and corrective maintenance work orders. It uses an Office Script to extract data from an Excel file stored in SharePoint and sends a formatted summary email to stakeholders.
+This flow generates a weekly email summarizing scanned files for preventive and corrective maintenance work orders. It runs an Office Script on a SharePoint-hosted Excel file to extract last week’s data (Fri → Thu), formats the results into an HTML table, and sends the summary to stakeholders. If no data is found, the flow sends a short “no data” notification.
 
 ---
 
-## Overview
+## 📌 Overview
 
-- Schedule: Weekly on Wednesday (UTC+07:00 Bangkok)
-- Systems used: Power Automate, SharePoint, Excel Online (Office Scripts), Outlook
-- Purpose:
-  - Automate weekly summary of scanned Excel files
-  - Convert extracted rows to HTML table
-  - Send formatted email to stakeholders
-  - Send "no data" email if no rows found
+- **Schedule:** Every Wednesday (UTC+07:00, Bangkok)
+- **Systems:** Power Automate, SharePoint (Documents), Excel Online (Office Scripts), Outlook
+- **Objectives**
+  - Automate weekly summary of scanned files
+  - Standardize email content with an HTML template
+  - Clearly show included sheets and key fields
+  - Send “no data” notification when appropriate
 
 ---
 
-## Flowchart (Mermaid)
+## 🧭 Flow Steps (High Level)
 
-```mermaid
-flowchart TB
-    A[Recurrence (Weekly)] --> B[Run script: ReadSheets_LastFriToThu]
-    B --> C{Rows > 0?}
-    C -- Yes --> D[Create HTML table]
-    D --> E[Compose IncludedSheetsString]
-    E --> F[Compose EmailBody (HTML)]
-    F --> G[Send summary email]
-    C -- No --> H[Send no-data email]
+1) **Recurrence** → runs weekly on Wednesday  
+2) **Run script (Excel Online)** → `ReadSheets_LastFriToThu` against `SCAN RECORD.xlsx`  
+3) **Condition:** `rows > 0 ?`
+   - **Yes (rows > 0):**  
+     a. Create **HTML table** from `result.rows`  
+     b. Build **IncludedSheetsString** (comma‑separated)  
+     c. Build **EmailBody** (HTML template)  
+     d. **Send email** (weekly summary)
+   - **No (rows = 0):**  
+     a. **Send email** (no‑data notification)
+
+---
+
+## 🧱 Flow Diagram (ASCII)
