@@ -62,7 +62,7 @@ flowchart TB
   class E outlook
 ``
 
-quenceDiagram
+```quenceDiagram
     autonumber
     participant PA as ⏰ Power Automate
     participant SP as 📁 SharePoint
@@ -81,3 +81,4 @@ quenceDiagram
 
     PA->>OL: Send email with attachment
     OL-->>PA: Delivered
+``
