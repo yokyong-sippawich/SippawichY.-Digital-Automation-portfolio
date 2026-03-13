@@ -1,17 +1,17 @@
 # Weekly Report – PK Asset Movement (Power Automate Flow)
 
-This flow runs weekly to copy the master Excel file into the archive, execute an Office Script to keep only the PK sheet, fetch the updated file, and email it to stakeholders as an attachment.
+This Power Automate flow runs weekly to prepare the PK Asset Movement report by copying the master file, running an Office Script to keep only the PK sheet, retrieving the updated file, and emailing it to stakeholders.
 
 ---
 
 ## 📌 Overview
 
-- Schedule: **Every Wednesday at 16:30 (UTC+07:00, Bangkok)**
-- Stack: **Power Automate**, **SharePoint**, **Excel Online (Office Scripts)**, **Outlook**
+- Schedule: Every Wednesday at 16:30 (UTC+07:00, Bangkok)
+- Systems used: Power Automate, SharePoint, Excel Online (Office Scripts), Outlook
 - Purpose:
-  - Automate weekly PK asset movement report preparation
-  - Ensure consistent data processing with Office Script
-  - Deliver the processed report to stakeholders reliably
+  - Automate weekly PK asset movement report
+  - Ensure consistent and clean data using an Office Script
+  - Send the processed file automatically via email
 
 ---
 
@@ -19,12 +19,9 @@ This flow runs weekly to copy the master Excel file into the archive, execute an
 
 ```mermaid
 flowchart TD
-    A[Trigger: Recurrence\nEvery Wednesday 16:30\nUTC+07:00 Bangkok] --> B
-
-    B[SharePoint: Copy file\nFrom: Master Log 14NOV22.xlsx\nTo: Asset Movement Request Archived\nIf exists: Replace] --> C
-
-    C[Excel Online: Run script\nScript: KeepOnlyPKSheet\nFile: ID from Copy file] --> D
-
-    D[SharePoint: Get file content\nFile Identifier: ID from Copy file\nInfer Content Type: Yes] --> E
-
-    E[Outlook: Send an email (V2)\nSubject: Weekly Report - PK Asset Movement\nAttach: processed Excel file] --> F[End]
+    A[Recurrence Trigger\nWednesday 16:30\nUTC+07 Bangkok] --> B
+    B[Copy file\nSource: Master Log 14NOV22.xlsx\nDestination: Archived folder\nIf exists: Replace] --> C
+    C[Run Office Script\nScript name: KeepOnlyPKSheet\nFile ID: from Copy file] --> D
+    D[Get file content\nFile ID: from Copy file] --> E
+    E[Send email\nSubject: Weekly Report PK Asset Movement\nAttachment: processed file] --> F[End]
+``
