@@ -61,3 +61,23 @@ flowchart TB
   class C excel
   class E outlook
 ``
+
+quenceDiagram
+    autonumber
+    participant PA as ⏰ Power Automate
+    participant SP as 📁 SharePoint
+    participant XL as 🧮 Excel Script
+    participant OL as 📧 Outlook
+
+    PA->>PA: Recurrence Wed 16:30 UTC+07
+    PA->>SP: Copy master file to archive (replace)
+    SP-->>PA: File ID
+
+    PA->>XL: Run KeepOnlyPKSheet on file ID
+    XL-->>PA: Script completed
+
+    PA->>SP: Get file content by file ID
+    SP-->>PA: File bytes
+
+    PA->>OL: Send email with attachment
+    OL-->>PA: Delivered
