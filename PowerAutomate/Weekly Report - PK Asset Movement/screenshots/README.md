@@ -17,7 +17,8 @@ This Power Automate flow runs weekly to prepare the PK Asset Movement report by 
 
 ## 🧩 Flowchart (Mermaid)
 
-```mermaid
+```
+mermaid
 flowchart TB
   %% --------------- LANES ---------------
   subgraph PA[Power Automate]
