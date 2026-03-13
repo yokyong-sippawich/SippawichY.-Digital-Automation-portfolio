@@ -22,23 +22,23 @@ flowchart TB
   %% --------------- LANES ---------------
   subgraph PA[Power Automate]
     direction TB
-    A[⏰ Recurrence\nWed 16:30\nUTC+07]
+    A["⏰ Recurrence<br/>Wed 16:30<br/>UTC+07"]
   end
 
   subgraph SP[SharePoint]
     direction TB
-    B[📁 Copy master to archive\nReplace if exists]
-    D[📥 Get file content\nby file ID]
+    B["📁 Copy master to archive<br/>Replace if exists"]
+    D["📥 Get file content<br/>by file ID"]
   end
 
   subgraph XL[Excel Online]
     direction TB
-    C[🧮 Run script\nKeepOnlyPKSheet]
+    C["🧮 Run script<br/>KeepOnlyPKSheet"]
   end
 
   subgraph OL[Outlook]
     direction TB
-    E[📧 Send email\nAttach processed file]
+    E["📧 Send email<br/>Attach processed file"]
   end
 
   %% --------------- FLOW ---------------
@@ -60,3 +60,4 @@ flowchart TB
   class B,D sharepoint
   class C excel
   class E outlook
+``
